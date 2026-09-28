@@ -35,17 +35,17 @@
             lblApellido = new Label();
             lblNombre = new Label();
             grbPlanes = new GroupBox();
+            txtMes = new TextBox();
+            chkCasillero = new CheckBox();
+            cmbTurno = new ComboBox();
+            cmbPlan = new ComboBox();
             lblMes = new Label();
             lblTurno = new Label();
             lblPlan = new Label();
-            cmbPlan = new ComboBox();
-            cmbTurno = new ComboBox();
-            chkCasillero = new CheckBox();
-            txtMes = new TextBox();
             gbxFromaDePago = new GroupBox();
-            rbtEfectivo = new RadioButton();
-            rbtTarjeta = new RadioButton();
             cboCuotas = new ComboBox();
+            rbtTarjeta = new RadioButton();
+            rbtEfectivo = new RadioButton();
             btnCalcular = new Button();
             btnLimpiar = new Button();
             grbDatosPersonales.SuspendLayout();
@@ -82,14 +82,14 @@
             textBox2.Location = new Point(78, 56);
             textBox2.Name = "textBox2";
             textBox2.Size = new Size(100, 23);
-            textBox2.TabIndex = 3;
+            textBox2.TabIndex = 1;
             // 
             // textBox1
             // 
             textBox1.Location = new Point(78, 27);
             textBox1.Name = "textBox1";
             textBox1.Size = new Size(100, 23);
-            textBox1.TabIndex = 2;
+            textBox1.TabIndex = 0;
             // 
             // lblApellido
             // 
@@ -126,6 +126,41 @@
             grbPlanes.TabStop = false;
             grbPlanes.Text = "Plan";
             // 
+            // txtMes
+            // 
+            txtMes.Location = new Point(86, 89);
+            txtMes.Name = "txtMes";
+            txtMes.Size = new Size(29, 23);
+            txtMes.TabIndex = 7;
+            // 
+            // chkCasillero
+            // 
+            chkCasillero.AutoSize = true;
+            chkCasillero.Location = new Point(21, 125);
+            chkCasillero.Name = "chkCasillero";
+            chkCasillero.Size = new Size(145, 19);
+            chkCasillero.TabIndex = 7;
+            chkCasillero.Text = "Casillero ($ 3.000/mes)";
+            chkCasillero.UseVisualStyleBackColor = true;
+            // 
+            // cmbTurno
+            // 
+            cmbTurno.FormattingEnabled = true;
+            cmbTurno.Items.AddRange(new object[] { "Mañana", "Tarde", "Noche" });
+            cmbTurno.Location = new Point(86, 60);
+            cmbTurno.Name = "cmbTurno";
+            cmbTurno.Size = new Size(121, 23);
+            cmbTurno.TabIndex = 1;
+            // 
+            // cmbPlan
+            // 
+            cmbPlan.FormattingEnabled = true;
+            cmbPlan.Items.AddRange(new object[] { "Musculacion", "Funcional", "Natacion" });
+            cmbPlan.Location = new Point(86, 25);
+            cmbPlan.Name = "cmbPlan";
+            cmbPlan.Size = new Size(121, 23);
+            cmbPlan.TabIndex = 0;
+            // 
             // lblMes
             // 
             lblMes.AutoSize = true;
@@ -153,41 +188,6 @@
             lblPlan.TabIndex = 7;
             lblPlan.Text = "Plan";
             // 
-            // cmbPlan
-            // 
-            cmbPlan.FormattingEnabled = true;
-            cmbPlan.Items.AddRange(new object[] { "Musculacion", "Funcional", "Natacion" });
-            cmbPlan.Location = new Point(86, 25);
-            cmbPlan.Name = "cmbPlan";
-            cmbPlan.Size = new Size(121, 23);
-            cmbPlan.TabIndex = 10;
-            // 
-            // cmbTurno
-            // 
-            cmbTurno.FormattingEnabled = true;
-            cmbTurno.Items.AddRange(new object[] { "Mañana", "Tarde", "Noche" });
-            cmbTurno.Location = new Point(86, 60);
-            cmbTurno.Name = "cmbTurno";
-            cmbTurno.Size = new Size(121, 23);
-            cmbTurno.TabIndex = 11;
-            // 
-            // chkCasillero
-            // 
-            chkCasillero.AutoSize = true;
-            chkCasillero.Location = new Point(21, 125);
-            chkCasillero.Name = "chkCasillero";
-            chkCasillero.Size = new Size(145, 19);
-            chkCasillero.TabIndex = 7;
-            chkCasillero.Text = "Casillero ($ 3.000/mes)";
-            chkCasillero.UseVisualStyleBackColor = true;
-            // 
-            // txtMes
-            // 
-            txtMes.Location = new Point(86, 89);
-            txtMes.Name = "txtMes";
-            txtMes.Size = new Size(29, 23);
-            txtMes.TabIndex = 7;
-            // 
             // gbxFromaDePago
             // 
             gbxFromaDePago.Controls.Add(cboCuotas);
@@ -200,16 +200,14 @@
             gbxFromaDePago.TabStop = false;
             gbxFromaDePago.Text = "Froma de pago";
             // 
-            // rbtEfectivo
+            // cboCuotas
             // 
-            rbtEfectivo.AutoSize = true;
-            rbtEfectivo.Location = new Point(30, 39);
-            rbtEfectivo.Name = "rbtEfectivo";
-            rbtEfectivo.Size = new Size(67, 19);
-            rbtEfectivo.TabIndex = 0;
-            rbtEfectivo.TabStop = true;
-            rbtEfectivo.Text = "Efectivo";
-            rbtEfectivo.UseVisualStyleBackColor = true;
+            cboCuotas.FormattingEnabled = true;
+            cboCuotas.Items.AddRange(new object[] { "1", "3", "6" });
+            cboCuotas.Location = new Point(45, 64);
+            cboCuotas.Name = "cboCuotas";
+            cboCuotas.Size = new Size(121, 23);
+            cboCuotas.TabIndex = 12;
             // 
             // rbtTarjeta
             // 
@@ -222,17 +220,20 @@
             rbtTarjeta.Text = "Tarjeta";
             rbtTarjeta.UseVisualStyleBackColor = true;
             // 
-            // cboCuotas
+            // rbtEfectivo
             // 
-            cboCuotas.FormattingEnabled = true;
-            cboCuotas.Items.AddRange(new object[] { "1", "3", "6" });
-            cboCuotas.Location = new Point(45, 64);
-            cboCuotas.Name = "cboCuotas";
-            cboCuotas.Size = new Size(121, 23);
-            cboCuotas.TabIndex = 12;
+            rbtEfectivo.AutoSize = true;
+            rbtEfectivo.Location = new Point(30, 39);
+            rbtEfectivo.Name = "rbtEfectivo";
+            rbtEfectivo.Size = new Size(67, 19);
+            rbtEfectivo.TabIndex = 0;
+            rbtEfectivo.TabStop = true;
+            rbtEfectivo.Text = "Efectivo";
+            rbtEfectivo.UseVisualStyleBackColor = true;
             // 
             // btnCalcular
             // 
+            btnCalcular.AccessibleRole = AccessibleRole.TitleBar;
             btnCalcular.Location = new Point(47, 451);
             btnCalcular.Name = "btnCalcular";
             btnCalcular.Size = new Size(75, 23);
