@@ -30,9 +30,9 @@
         {
             grbDatosPersonales = new GroupBox();
             chkEstudiante = new CheckBox();
-            textBox2 = new TextBox();
-            textBox1 = new TextBox();
-            lblApellido = new Label();
+            txtEdad = new TextBox();
+            txtNombre = new TextBox();
+            lblEdad = new Label();
             lblNombre = new Label();
             grbPlanes = new GroupBox();
             txtMes = new TextBox();
@@ -56,9 +56,9 @@
             // grbDatosPersonales
             // 
             grbDatosPersonales.Controls.Add(chkEstudiante);
-            grbDatosPersonales.Controls.Add(textBox2);
-            grbDatosPersonales.Controls.Add(textBox1);
-            grbDatosPersonales.Controls.Add(lblApellido);
+            grbDatosPersonales.Controls.Add(txtEdad);
+            grbDatosPersonales.Controls.Add(txtNombre);
+            grbDatosPersonales.Controls.Add(lblEdad);
             grbDatosPersonales.Controls.Add(lblNombre);
             grbDatosPersonales.Location = new Point(25, 24);
             grbDatosPersonales.Name = "grbDatosPersonales";
@@ -73,32 +73,32 @@
             chkEstudiante.Location = new Point(56, 100);
             chkEstudiante.Name = "chkEstudiante";
             chkEstudiante.Size = new Size(81, 19);
-            chkEstudiante.TabIndex = 6;
+            chkEstudiante.TabIndex = 3;
             chkEstudiante.Text = "Estudiante";
             chkEstudiante.UseVisualStyleBackColor = true;
             // 
-            // textBox2
+            // txtEdad
             // 
-            textBox2.Location = new Point(78, 56);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(100, 23);
-            textBox2.TabIndex = 1;
+            txtEdad.Location = new Point(78, 56);
+            txtEdad.Name = "txtEdad";
+            txtEdad.Size = new Size(100, 23);
+            txtEdad.TabIndex = 2;
             // 
-            // textBox1
+            // txtNombre
             // 
-            textBox1.Location = new Point(78, 27);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(100, 23);
-            textBox1.TabIndex = 0;
+            txtNombre.Location = new Point(78, 27);
+            txtNombre.Name = "txtNombre";
+            txtNombre.Size = new Size(100, 23);
+            txtNombre.TabIndex = 1;
             // 
-            // lblApellido
+            // lblEdad
             // 
-            lblApellido.AutoSize = true;
-            lblApellido.Location = new Point(21, 61);
-            lblApellido.Name = "lblApellido";
-            lblApellido.Size = new Size(51, 15);
-            lblApellido.TabIndex = 1;
-            lblApellido.Text = "Apellido";
+            lblEdad.AutoSize = true;
+            lblEdad.Location = new Point(21, 61);
+            lblEdad.Name = "lblEdad";
+            lblEdad.Size = new Size(33, 15);
+            lblEdad.TabIndex = 2;
+            lblEdad.Text = "Edad";
             // 
             // lblNombre
             // 
@@ -131,7 +131,9 @@
             txtMes.Location = new Point(86, 89);
             txtMes.Name = "txtMes";
             txtMes.Size = new Size(29, 23);
-            txtMes.TabIndex = 7;
+            txtMes.TabIndex = 6;
+            txtMes.TextChanged += txtMes_TextChanged;
+            txtMes.KeyPress += txtMes_KeyPress;
             // 
             // chkCasillero
             // 
@@ -150,7 +152,7 @@
             cmbTurno.Location = new Point(86, 60);
             cmbTurno.Name = "cmbTurno";
             cmbTurno.Size = new Size(121, 23);
-            cmbTurno.TabIndex = 1;
+            cmbTurno.TabIndex = 5;
             // 
             // cmbPlan
             // 
@@ -159,7 +161,7 @@
             cmbPlan.Location = new Point(86, 25);
             cmbPlan.Name = "cmbPlan";
             cmbPlan.Size = new Size(121, 23);
-            cmbPlan.TabIndex = 0;
+            cmbPlan.TabIndex = 4;
             // 
             // lblMes
             // 
@@ -207,7 +209,7 @@
             cboCuotas.Location = new Point(45, 64);
             cboCuotas.Name = "cboCuotas";
             cboCuotas.Size = new Size(121, 23);
-            cboCuotas.TabIndex = 12;
+            cboCuotas.TabIndex = 10;
             // 
             // rbtTarjeta
             // 
@@ -215,7 +217,7 @@
             rbtTarjeta.Location = new Point(118, 39);
             rbtTarjeta.Name = "rbtTarjeta";
             rbtTarjeta.Size = new Size(60, 19);
-            rbtTarjeta.TabIndex = 1;
+            rbtTarjeta.TabIndex = 9;
             rbtTarjeta.TabStop = true;
             rbtTarjeta.Text = "Tarjeta";
             rbtTarjeta.UseVisualStyleBackColor = true;
@@ -226,7 +228,7 @@
             rbtEfectivo.Location = new Point(30, 39);
             rbtEfectivo.Name = "rbtEfectivo";
             rbtEfectivo.Size = new Size(67, 19);
-            rbtEfectivo.TabIndex = 0;
+            rbtEfectivo.TabIndex = 8;
             rbtEfectivo.TabStop = true;
             rbtEfectivo.Text = "Efectivo";
             rbtEfectivo.UseVisualStyleBackColor = true;
@@ -237,7 +239,7 @@
             btnCalcular.Location = new Point(47, 451);
             btnCalcular.Name = "btnCalcular";
             btnCalcular.Size = new Size(75, 23);
-            btnCalcular.TabIndex = 3;
+            btnCalcular.TabIndex = 11;
             btnCalcular.Text = "Calcular";
             btnCalcular.UseVisualStyleBackColor = true;
             // 
@@ -246,12 +248,14 @@
             btnLimpiar.Location = new Point(143, 451);
             btnLimpiar.Name = "btnLimpiar";
             btnLimpiar.Size = new Size(75, 23);
-            btnLimpiar.TabIndex = 4;
+            btnLimpiar.TabIndex = 12;
             btnLimpiar.Text = "Limpiar";
             btnLimpiar.UseVisualStyleBackColor = true;
+            btnLimpiar.Click += btnLimpiar_Click;
             // 
             // FrmInscripcion
             // 
+            AcceptButton = btnCalcular;
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(270, 501);
@@ -279,9 +283,9 @@
 
         private GroupBox grbDatosPersonales;
         private CheckBox chkEstudiante;
-        private TextBox textBox2;
-        private TextBox textBox1;
-        private Label lblApellido;
+        private TextBox txtEdad;
+        private TextBox txtNombre;
+        private Label lblEdad;
         private Label lblNombre;
         private GroupBox grbPlanes;
         private Label lblMes;

@@ -23,7 +23,8 @@ namespace pryBravoGimnasioSiglo
         const int UNA_CUOTA = 0;
         const int TRES_CUOTAS = 10;
         const int SEIS_CUOTAS = 20;
-        
+
+
 
 
         public FrmInscripcion()
@@ -31,9 +32,24 @@ namespace pryBravoGimnasioSiglo
             InitializeComponent();
         }
 
+        private void EstadoInicial()
+        {
+            txtNombre.Clear();
+            txtEdad.Clear();
+            chkEstudiante.Checked = false;
+
+            cmbPlan.SelectedIndex = -1;
+            cmbTurno.SelectedIndex = -1;
+            txtMes.Text = "1";
+            chkCasillero.Checked = false;
+
+
+
+        }
+
         private void FrmInscripcion_Load(object sender, EventArgs e)
         {
-
+            EstadoInicial();
         }
 
         private void label2_Click(object sender, EventArgs e)
@@ -44,6 +60,29 @@ namespace pryBravoGimnasioSiglo
         private void label1_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void txtMes_TextChanged(object sender, EventArgs e)
+        {
+            int num = int.Parse(txtMes.Text);
+            if (num > 12 || num < 1)
+            {
+                MessageBox.Show("Mes invalido");
+                return;
+            }
+        }
+
+        private void txtMes_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar) && e.KeyChar == (char)8)
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void btnLimpiar_Click(object sender, EventArgs e)
+        {
+            EstadoInicial();
         }
     }
 }
