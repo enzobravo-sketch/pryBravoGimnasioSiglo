@@ -89,7 +89,7 @@ namespace pryBravoGimnasioSiglo
         {
             string nombre = txtNombre.Text;
             int edad = int.Parse(txtEdad.Text);
-            int mes = int.Parse(txtMes.Text);   
+            int mes = int.Parse(txtMes.Text);
 
             decimal precioMensual = 0m;
             decimal porcentajeDescuento = 0m;
@@ -97,6 +97,14 @@ namespace pryBravoGimnasioSiglo
             decimal total = 0m;
             decimal valorCuota = 0m;
 
+        }
+
+        private void txtEdad_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsDigit(e.KeyChar) && e.KeyChar == (char)8)
+            {
+                e.Handled = true;
+            }
         }
     }
 }

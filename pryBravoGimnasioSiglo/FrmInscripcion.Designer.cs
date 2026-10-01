@@ -83,6 +83,7 @@
             txtEdad.Name = "txtEdad";
             txtEdad.Size = new Size(100, 23);
             txtEdad.TabIndex = 2;
+            txtEdad.KeyPress += txtEdad_KeyPress;
             // 
             // txtNombre
             // 
