@@ -84,5 +84,19 @@ namespace pryBravoGimnasioSiglo
         {
             EstadoInicial();
         }
+
+        private void btnCalcular_Click(object sender, EventArgs e)
+        {
+            string nombre = txtNombre.Text;
+            int edad = int.Parse(txtEdad.Text);
+            int mes = int.Parse(txtMes.Text);   
+
+            decimal precioMensual = 0m;
+            decimal porcentajeDescuento = 0m;
+            decimal porcentajeAjustePago = 0m;
+            decimal total = 0m;
+            decimal valorCuota = 0m;
+
+        }
     }
 }
