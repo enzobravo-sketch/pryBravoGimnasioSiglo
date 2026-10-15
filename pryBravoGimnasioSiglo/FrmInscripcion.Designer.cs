@@ -83,6 +83,7 @@
             txtEdad.Name = "txtEdad";
             txtEdad.Size = new Size(100, 23);
             txtEdad.TabIndex = 2;
+            txtEdad.TextChanged += txtEdad_TextChanged;
             txtEdad.KeyPress += txtEdad_KeyPress;
             // 
             // txtNombre
@@ -91,6 +92,8 @@
             txtNombre.Name = "txtNombre";
             txtNombre.Size = new Size(100, 23);
             txtNombre.TabIndex = 1;
+            txtNombre.TextChanged += txtNombre_TextChanged;
+            txtNombre.KeyPress += txtNombre_KeyPress;
             // 
             // lblEdad
             // 
@@ -134,7 +137,7 @@
             txtMes.Size = new Size(29, 23);
             txtMes.TabIndex = 6;
             txtMes.TextChanged += txtMes_TextChanged;
-            txtMes.KeyPress += txtMes_KeyPress;
+            txtMes.KeyPress += txtEdad_KeyPress;
             // 
             // chkCasillero
             // 

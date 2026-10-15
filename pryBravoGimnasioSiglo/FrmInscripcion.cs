@@ -1,3 +1,5 @@
+using System.Drawing.Text;
+
 namespace pryBravoGimnasioSiglo
 {
     public partial class FrmInscripcion : Form
@@ -27,9 +29,11 @@ namespace pryBravoGimnasioSiglo
 
 
 
+
         public FrmInscripcion()
         {
             InitializeComponent();
+            txtEdad.MaxLength = 2;
         }
 
         private void EstadoInicial()
@@ -97,14 +101,88 @@ namespace pryBravoGimnasioSiglo
             decimal total = 0m;
             decimal valorCuota = 0m;
 
+            int Edad = int.Parse(txtEdad.Text);
+            int Mes = int.Parse(txtMes.Text);
+
+            const int EDAD_MINIMA = 14;
+
+            if (Edad < EDAD_MINIMA)
+            {
+                MessageBox.Show("La edad mínima para inscribirse es de 14 años.");
+                return;
+            }
+
+            if (Mes < 1 || Mes > 12)
+            {
+                MessageBox.Show("El mes debe estar entre 1 y 12.");
+                return;
+            }
+
+            string planSeleccionado = cmbPlan.SelectedItem?.ToString();
+            decimal precioMes = 0m;
+
+            switch(planSeleccionado)
+            {
+                case "Plan Musculacion":
+                    precioMes = 15000;
+                    break;
+                case "Plan Funcional":
+                    precioMes = 18000;
+                    break;
+                case "Plan Natación":
+                    precioMes = 22000;
+                    break;
+
+                default:
+                    MessageBox.Show("Plan inválido.");
+                    break;
+            }
+
+
+            string horarioTurno = "";
+
+            
         }
 
         private void txtEdad_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsDigit(e.KeyChar) && e.KeyChar == (char)8)
+
+            if (!char.IsDigit(e.KeyChar) && e.KeyChar != (char)Keys.Back)
             {
                 e.Handled = true;
             }
         }
-    }
+
+        private void txtEdad_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtNombre_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtNombre_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (char.IsLower(e.KeyChar))
+            {
+                e.KeyChar = char.ToUpper(e.KeyChar);
+            }
+        
+        }
+
+        private void ValidarCampos(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrWhiteSpace(txtNombre.Text) &&
+                !string.IsNullOrWhiteSpace(txtEdad.Text) &&
+                !string.IsNullOrWhiteSpace(txtMes.Text))
+            {
+                btnCalcular.Enabled = true;
+            }
+            else
+            {
+                btnCalcular.Enabled = false;
+            }
+        }
 }
