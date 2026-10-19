@@ -2,6 +2,21 @@ using System.Drawing.Text;
 
 namespace pryBravoGimnasioSiglo
 {
+
+    public struct SOCIO
+    {
+        public string Nombre;
+        public int Edad;
+        public string Plan;
+        public string Turno;
+        public int Meses;
+        public bool Casillero;
+        public bool Estudiante;
+        public string FormaPago;
+        public decimal Total;
+        public decimal ValorCuota;
+            
+    }
     public partial class FrmInscripcion : Form
     {
         const int MUSCULACION = 15000;
@@ -103,7 +118,7 @@ namespace pryBravoGimnasioSiglo
 
             int Edad = int.Parse(txtEdad.Text);
             int Mes = int.Parse(txtMes.Text);
-
+            //EDAD
             const int EDAD_MINIMA = 14;
 
             if (Edad < EDAD_MINIMA)
@@ -117,11 +132,11 @@ namespace pryBravoGimnasioSiglo
                 MessageBox.Show("El mes debe estar entre 1 y 12.");
                 return;
             }
-
+            //PLANES
             string planSeleccionado = cmbPlan.SelectedItem?.ToString();
             decimal precioMes = 0m;
 
-            switch(planSeleccionado)
+            switch (planSeleccionado)
             {
                 case "Plan Musculacion":
                     precioMes = 15000;
@@ -140,8 +155,107 @@ namespace pryBravoGimnasioSiglo
 
 
             string horarioTurno = "";
+            //TURNOS
+            switch (cmbTurno.SelectedIndex)
+            {
+                case 0:
+                    horarioTurno = "Mañana";
+                    break;
+                case 1:
+                    horarioTurno = "Tarde";
+                    break;
+                case 2:
+                    horarioTurno = "Noche";
+                    break;
+                default:
+                    MessageBox.Show("Turno inválido.");
+                    break;
+            }
+            //CASILLERO
 
+            if (chkCasillero.Checked) precioMensual += CASILLERO;
+
+            //DESCUENTOS
+
+            if (edad < 18)
+            {
+                porcentajeDescuento = MENOR_DIECIOCHO;
+            }
+            else
+            {
+                if (edad >= 65)
+                {
+                    porcentajeDescuento = DESCUENTO_MAYOR_EDAD;
+                }
+                else
+                {
+                    if (chkEstudiante.Checked)
+                    {
+                        porcentajeDescuento = DESCUENTO_ESTUDIANTE;
+                    }
+                    else
+                    {
+                        porcentajeDescuento = 0;
+                    }
+                }
+            }
+
+            total = (precioMensual * mes) / 100;
+
+            //FORMA DE PAGO EFECTIVO
             
+            if (rbtEfectivo.Checked)
+            {
+                porcentajeAjustePago = DESCUENTO_EFECTIVO;
+            }
+            else
+            {
+                int cuotas = int.Parse(cboCuotas.SelectedItem.ToString());
+                if (cuotas == 1)
+                {
+                    porcentajeAjustePago = UNA_CUOTA;
+                }
+                else if (cuotas == 3)
+                {
+                    porcentajeAjustePago = TRES_CUOTAS;
+                }
+                else if (cuotas == 6)
+                {
+                    porcentajeAjustePago = SEIS_CUOTAS;
+                }
+            }
+
+            total = total + (total * porcentajeAjustePago / 100);
+
+            //MENOR O MAYOR
+            string categoriaSocio = (edad < 18) ? "Menor" : "Mayor";
+
+            //22 TEXTO FORMA DE PAGO
+
+            string textoFormaPago = rbtEfectivo.Checked ? "Efectivo" : $"Tarjeta en {cboCuotas.SelectedItem} cuotas";
+
+            valorCuota = rbtEfectivo.Checked ? total : total / int.Parse(cboCuotas.SelectedItem.ToString());
+
+            // MENSAJE
+            SOCIO unSocio;
+            unSocio.Nombre = nombre;   
+            unSocio.Edad = edad;   
+            unSocio.Plan = planSeleccionado;
+            unSocio.Turno = horarioTurno;
+            unSocio.Meses = mes;
+            unSocio.FormaPago = textoFormaPago;
+            unSocio.Total = total; 
+            unSocio.ValorCuota = valorCuota;
+
+            MessageBox.Show(
+                $"Nombre: {unSocio.Nombre}\n" +
+                $"Edad: {unSocio.Edad}\n" +
+                $"Plan: {unSocio.Plan}\n" +
+                $"Turno: {unSocio.Turno}\n" +
+                $"Meses: {unSocio.Meses}\n" +
+                $"Forma de Pago: {unSocio.FormaPago}\n" +
+                $"Total a Pagar: ${unSocio.Total}\n" +
+                $"Valor de la Cuota: ${unSocio.ValorCuota}");
         }
 
         private void txtEdad_KeyPress(object sender, KeyPressEventArgs e)
@@ -169,7 +283,7 @@ namespace pryBravoGimnasioSiglo
             {
                 e.KeyChar = char.ToUpper(e.KeyChar);
             }
-        
+
         }
 
         private void ValidarCampos(object sender, EventArgs e)
@@ -185,4 +299,19 @@ namespace pryBravoGimnasioSiglo
                 btnCalcular.Enabled = false;
             }
         }
+
+        private void rbtTarjeta_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rbtTarjeta.Checked)
+            {
+                cboCuotas.Enabled = true;
+                cboCuotas.SelectedIndex = 0;
+            }
+            else
+            {
+                cboCuotas.Enabled = false;
+                cboCuotas.SelectedIndex = -1;
+            }
+        }
+    } 
 }

@@ -225,6 +225,7 @@
             rbtTarjeta.TabStop = true;
             rbtTarjeta.Text = "Tarjeta";
             rbtTarjeta.UseVisualStyleBackColor = true;
+            rbtTarjeta.CheckedChanged += rbtTarjeta_CheckedChanged;
             // 
             // rbtEfectivo
             // 
