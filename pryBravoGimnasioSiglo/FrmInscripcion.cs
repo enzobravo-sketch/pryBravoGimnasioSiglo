@@ -2,6 +2,8 @@ using System.Drawing.Text;
 
 namespace pryBravoGimnasioSiglo
 {
+    
+
 
     public struct SOCIO
     {
@@ -19,6 +21,9 @@ namespace pryBravoGimnasioSiglo
     }
     public partial class FrmInscripcion : Form
     {
+        private SOCIO[] vectorSocios = new SOCIO[100];
+        private int indiceSocio = 0;
+
         const int MUSCULACION = 15000;
         const int FUNCIONAL = 18000;
         const int NATACION = 22000;
@@ -268,6 +273,8 @@ namespace pryBravoGimnasioSiglo
                 $"Forma de Pago: {unSocio.FormaPago}\n" +
                 $"Total a Pagar: ${unSocio.Total}\n" +
                 $"Valor de la Cuota: ${unSocio.ValorCuota}");
+            
+            indiceSocio += 1;
         }
 
         private void txtEdad_KeyPress(object sender, KeyPressEventArgs e)
