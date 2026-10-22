@@ -166,6 +166,7 @@
             cmbPlan.Name = "cmbPlan";
             cmbPlan.Size = new Size(121, 23);
             cmbPlan.TabIndex = 4;
+            cmbPlan.SelectedIndexChanged += cmbPlan_SelectedIndexChanged;
             // 
             // lblMes
             // 
@@ -214,6 +215,7 @@
             cboCuotas.Name = "cboCuotas";
             cboCuotas.Size = new Size(121, 23);
             cboCuotas.TabIndex = 10;
+            cboCuotas.SelectedIndexChanged += cboCuotas_SelectedIndexChanged;
             // 
             // rbtTarjeta
             // 

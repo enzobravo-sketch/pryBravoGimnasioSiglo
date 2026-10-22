@@ -33,7 +33,7 @@ namespace pryBravoGimnasioSiglo
 
         const int MENOR_DIECIOCHO = 25;
         const int DESCUENTO_MAYOR_EDAD = 30;
-        const int DESCUENTO_ESTUDIANTE = 25;
+        const int DESCUENTO_ESTUDIANTE = 15;
 
         const int DESCUENTO_EFECTIVO = 10;
 
@@ -59,9 +59,9 @@ namespace pryBravoGimnasioSiglo
 
             cmbPlan.SelectedIndex = -1;
             cmbTurno.SelectedIndex = -1;
-            txtMes.Text = "1";  
+            txtMes.Text = "1";
             chkCasillero.Checked = false;
-            rbtEfectivo.Checked = true;
+            rbtEfectivo.Checked = false;
 
 
         }
@@ -89,6 +89,8 @@ namespace pryBravoGimnasioSiglo
                 MessageBox.Show("Mes invalido");
                 return;
             }
+
+            ValidarCampos(sender, e);
         }
 
         private void txtMes_KeyPress(object sender, KeyPressEventArgs e)
@@ -135,18 +137,18 @@ namespace pryBravoGimnasioSiglo
             }
             //PLANES
             string planSeleccionado = cmbPlan.SelectedItem?.ToString();
-            decimal precioMes = 0m;
+            
 
             switch (planSeleccionado)
             {
                 case "Musculacion":
-                    precioMes = 15000;
+                    precioMensual = 15000;
                     break;
                 case "Funcional":
-                    precioMes = 18000;
+                    precioMensual = 18000;
                     break;
-                case "Natación":
-                    precioMes = 22000;
+                case "Natacion":
+                    precioMensual = 22000;
                     break;
 
                 default:
@@ -157,7 +159,7 @@ namespace pryBravoGimnasioSiglo
 
             string horarioTurno = "";
             //TURNOS
-            switch (cmbTurno.SelectedIndex)     
+            switch (cmbTurno.SelectedIndex)
             {
                 case 0:
                     horarioTurno = "Mañana";
@@ -201,7 +203,7 @@ namespace pryBravoGimnasioSiglo
                 }
             }
             decimal subtotal = precioMensual * mes;
-            decimal montoConDescuento = subtotal - (subtotal * porcentajeDescuento / 100); 
+            decimal montoConDescuento = subtotal - (subtotal * porcentajeDescuento / 100);
 
             //FORMA DE PAGO EFECTIVO
 
@@ -224,8 +226,17 @@ namespace pryBravoGimnasioSiglo
                 {
                     porcentajeAjustePago = SEIS_CUOTAS;
                 }
+            
             }
-            total = montoConDescuento + (montoConDescuento * porcentajeAjustePago / 100);
+            if (rbtTarjeta.Checked)
+            {
+                total = montoConDescuento + (montoConDescuento * porcentajeAjustePago / 100);
+            }
+            else
+            {
+                total = montoConDescuento - (montoConDescuento * porcentajeAjustePago / 100);
+            }
+            //total = montoConDescuento + (montoConDescuento * porcentajeAjustePago / 100);
             //total = total + (total * porcentajeAjustePago / 100);
 
             //MENOR O MAYOR
@@ -239,13 +250,13 @@ namespace pryBravoGimnasioSiglo
 
             // MENSAJE
             SOCIO unSocio;
-            unSocio.Nombre = nombre;   
-            unSocio.Edad = edad;   
+            unSocio.Nombre = nombre;
+            unSocio.Edad = edad;
             unSocio.Plan = planSeleccionado;
             unSocio.Turno = horarioTurno;
             unSocio.Meses = mes;
             unSocio.FormaPago = textoFormaPago;
-            unSocio.Total = total; 
+            unSocio.Total = total;
             unSocio.ValorCuota = valorCuota;
 
             MessageBox.Show(
@@ -270,12 +281,12 @@ namespace pryBravoGimnasioSiglo
 
         private void txtEdad_TextChanged(object sender, EventArgs e)
         {
-
+            ValidarCampos(sender, e);
         }
 
         private void txtNombre_TextChanged(object sender, EventArgs e)
         {
-
+            ValidarCampos(sender, e);
         }
 
         private void txtNombre_KeyPress(object sender, KeyPressEventArgs e)
@@ -314,5 +325,18 @@ namespace pryBravoGimnasioSiglo
                 cboCuotas.SelectedIndex = -1;
             }
         }
-    } 
+
+        private void cmbPlan_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cboCuotas_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (rbtTarjeta.Checked)
+            {
+                ValidarCampos(sender, e);
+            }
+        }
+    }
 }
