@@ -59,9 +59,9 @@ namespace pryBravoGimnasioSiglo
 
             cmbPlan.SelectedIndex = -1;
             cmbTurno.SelectedIndex = -1;
-            txtMes.Text = "1";
+            txtMes.Text = "1";  
             chkCasillero.Checked = false;
-
+            rbtEfectivo.Checked = true;
 
 
         }
@@ -118,6 +118,7 @@ namespace pryBravoGimnasioSiglo
 
             int Edad = int.Parse(txtEdad.Text);
             int Mes = int.Parse(txtMes.Text);
+
             //EDAD
             const int EDAD_MINIMA = 14;
 
@@ -138,13 +139,13 @@ namespace pryBravoGimnasioSiglo
 
             switch (planSeleccionado)
             {
-                case "Plan Musculacion":
+                case "Musculacion":
                     precioMes = 15000;
                     break;
-                case "Plan Funcional":
+                case "Funcional":
                     precioMes = 18000;
                     break;
-                case "Plan Natación":
+                case "Natación":
                     precioMes = 22000;
                     break;
 
@@ -156,7 +157,7 @@ namespace pryBravoGimnasioSiglo
 
             string horarioTurno = "";
             //TURNOS
-            switch (cmbTurno.SelectedIndex)
+            switch (cmbTurno.SelectedIndex)     
             {
                 case 0:
                     horarioTurno = "Mañana";
@@ -171,7 +172,7 @@ namespace pryBravoGimnasioSiglo
                     MessageBox.Show("Turno inválido.");
                     break;
             }
-            //CASILLERO
+            //CASILLERO 
 
             if (chkCasillero.Checked) precioMensual += CASILLERO;
 
@@ -199,11 +200,11 @@ namespace pryBravoGimnasioSiglo
                     }
                 }
             }
-
-            total = (precioMensual * mes) / 100;
+            decimal subtotal = precioMensual * mes;
+            decimal montoConDescuento = subtotal - (subtotal * porcentajeDescuento / 100); 
 
             //FORMA DE PAGO EFECTIVO
-            
+
             if (rbtEfectivo.Checked)
             {
                 porcentajeAjustePago = DESCUENTO_EFECTIVO;
@@ -224,8 +225,8 @@ namespace pryBravoGimnasioSiglo
                     porcentajeAjustePago = SEIS_CUOTAS;
                 }
             }
-
-            total = total + (total * porcentajeAjustePago / 100);
+            total = montoConDescuento + (montoConDescuento * porcentajeAjustePago / 100);
+            //total = total + (total * porcentajeAjustePago / 100);
 
             //MENOR O MAYOR
             string categoriaSocio = (edad < 18) ? "Menor" : "Mayor";
