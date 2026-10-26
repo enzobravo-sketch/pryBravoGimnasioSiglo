@@ -254,7 +254,7 @@ namespace pryBravoGimnasioSiglo
             valorCuota = rbtEfectivo.Checked ? total : total / int.Parse(cboCuotas.SelectedItem.ToString());
 
             // MENSAJE
-            SOCIO unSocio;
+            SOCIO unSocio = new SOCIO();
             unSocio.Nombre = nombre;
             unSocio.Edad = edad;
             unSocio.Plan = planSeleccionado;
@@ -264,6 +264,17 @@ namespace pryBravoGimnasioSiglo
             unSocio.Total = total;
             unSocio.ValorCuota = valorCuota;
 
+            if (indiceSocio < vectorSocios.Length)
+            {
+                vectorSocios[indiceSocio] = unSocio;
+                indiceSocio++;
+            }
+            else
+            {
+                MessageBox.Show("El vector está lleno.");
+            }
+
+            
             MessageBox.Show(
                 $"Nombre: {unSocio.Nombre}\n" +
                 $"Edad: {unSocio.Edad}\n" +

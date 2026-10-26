@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmInscripcion));
             grbDatosPersonales = new GroupBox();
             chkEstudiante = new CheckBox();
             txtEdad = new TextBox();
@@ -151,6 +152,7 @@
             // 
             // cmbTurno
             // 
+            cmbTurno.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbTurno.FormattingEnabled = true;
             cmbTurno.Items.AddRange(new object[] { "Mañana", "Tarde", "Noche" });
             cmbTurno.Location = new Point(86, 60);
@@ -160,6 +162,7 @@
             // 
             // cmbPlan
             // 
+            cmbPlan.DropDownStyle = ComboBoxStyle.DropDownList;
             cmbPlan.FormattingEnabled = true;
             cmbPlan.Items.AddRange(new object[] { "Musculacion", "Funcional", "Natacion" });
             cmbPlan.Location = new Point(86, 25);
@@ -209,6 +212,7 @@
             // 
             // cboCuotas
             // 
+            cboCuotas.Enabled = false;
             cboCuotas.FormattingEnabled = true;
             cboCuotas.Items.AddRange(new object[] { "1", "3", "6" });
             cboCuotas.Location = new Point(45, 64);
@@ -273,6 +277,7 @@
             Controls.Add(grbPlanes);
             Controls.Add(grbDatosPersonales);
             FormBorderStyle = FormBorderStyle.FixedSingle;
+            Icon = (Icon)resources.GetObject("$this.Icon");
             MaximizeBox = false;
             Name = "FrmInscripcion";
             StartPosition = FormStartPosition.CenterScreen;
